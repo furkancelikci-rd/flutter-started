@@ -61,6 +61,7 @@ class TodoDetailState extends State {
                 TextField(
                   controller: titleController,
                   style: textStyle,
+                  onChanged: (value) => this.updateTitle(),
                   decoration: InputDecoration(
                       labelText: "Başlık",
                       labelStyle: textStyle,
@@ -72,6 +73,7 @@ class TodoDetailState extends State {
                     child: TextField(
                       controller: descController,
                       style: textStyle,
+                      onChanged: (value) => this.updateDesc(),
                       decoration: InputDecoration(
                           labelText: "Açıklama",
                           labelStyle: textStyle,
@@ -80,10 +82,10 @@ class TodoDetailState extends State {
                     )),
                 DropdownButton<String>(
                     style: textStyle,
-                    value: _priority,
+                    value: reteievePriority(todo.priority),
                     elevation: 16,
-                    onChanged: null,
-                    items: <String>['High', 'Medium', 'Low']
+                    onChanged: (value) => updatePriority(value),
+                    items: _priorities
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -94,5 +96,69 @@ class TodoDetailState extends State {
             )));
   }
 
+  void select(String value) async {
+    int result;
+    switch (value) {
+      case mnuSave:
+        save();
+        break;
+      case mnuDelete:
+        Navigator.pop(context, true);
+        if (todo.id == null) {
+          return;
+        }
+        result = await helper.deleteTodo(todo.id);
+        if (result != 0) {
+          AlertDialog alertDialog = AlertDialog(
+            title: Text("Todo Sil"),
+            content: Text("Todo Silindi"),
+          );
+          showDialog(context: context, builder: (_) => alertDialog);
+        }
+        break;
+      case mnuBack:
+        Navigator.pop(context, true);
+        break;
+      default:
+    }
+  }
 
+  void save() {
+    todo.date = new DateFormat.yMd().format(DateTime.now());
+    if (todo.id != null) {
+      helper.updateTodo(todo);
+    } else {
+      helper.insertTodo(todo);
+    }
+    Navigator.pop(context, true);
+  }
+
+  void updatePriority(String value) {
+    switch (value) {
+      case "High":
+        todo.priority = 1;
+        break;
+      case "Medium":
+        todo.priority = 2;
+        break;
+      case "Low":
+        todo.priority = 3;
+        break;
+    }
+    setState(() {
+      _priority = value;
+    });
+  }
+
+  String reteievePriority(int value) {
+    return _priorities[value - 1];
+  }
+
+  void updateTitle() {
+    todo.title = titleController.text;
+  }
+
+  void updateDesc() {
+    todo.description = descController.text;
+  }
 }
