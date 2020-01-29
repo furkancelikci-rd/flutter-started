@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/gesanim.dart';
 import 'package:todo_app/screens/todolist.dart';
 import 'package:todo_app/utils/dbhelper.dart';
 import 'package:todo_app/model/todo.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
       ),
-      home: MyHomePage(title: 'Bilgisayarlar'),
+      home: MyHomePage(title: 'Flutter Denemeler'),
     );
   }
 }
@@ -35,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: TodoList(),
+      body: GesAnim(),
     );
   }
 }
