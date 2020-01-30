@@ -1,4 +1,6 @@
-# todo_app
+# FlutterExample
+
+Colors: https://www.materialpalette.com/
 
 A new Flutter project.
 
