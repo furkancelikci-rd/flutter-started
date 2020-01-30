@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/basicLayout.dart';
 import 'package:todo_app/screens/gesanim.dart';
 import 'package:todo_app/screens/todolist.dart';
 import 'package:todo_app/utils/dbhelper.dart';
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Computer List',
+      title: 'Flutter Example',
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
       ),
@@ -36,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: GesAnim(),
+      body: BasicLayout(),
     );
   }
 }
