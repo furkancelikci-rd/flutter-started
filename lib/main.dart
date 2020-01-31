@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/screens/basicLayout.dart';
 import 'package:todo_app/screens/gesanim.dart';
+import 'package:todo_app/screens/rowsColmuns.dart';
 import 'package:todo_app/screens/todolist.dart';
 import 'package:todo_app/utils/dbhelper.dart';
 import 'package:todo_app/model/todo.dart';
@@ -39,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: BasicLayout(),
+      body: RowsAndColumns(),
     );
   }
 }
