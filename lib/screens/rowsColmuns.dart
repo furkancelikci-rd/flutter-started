@@ -8,8 +8,13 @@ class RowsAndColumns extends StatelessWidget {
     return Container(
         width: sizeX,
         height: sizeY,
-        child: ListView(
-          children: showContacts(),
+        child: GridView.count(
+          scrollDirection: Axis.horizontal, // scroolbar left -> right
+          crossAxisCount: 3,
+          children: createSquare(50),
+          mainAxisSpacing: 5.0,
+          crossAxisSpacing: 5.0,
+          padding: EdgeInsets.all(5),
         ));
   }
 }
@@ -26,7 +31,7 @@ List<Widget> createSquare(int numSquare) {
   List<Widget> squares = List<Widget>();
   while (i < numSquare) {
     Container square = Container(
-      color: colors[i],
+      color: colors[i % 5],
       width: 60,
       height: 60,
       child: Text(i.toString()),
@@ -121,8 +126,8 @@ List<Widget> showPizzaLayout(double sizeX, double sizeY) {
 
 List<Contact> buildContacts() {
   List<Contact> contacts = List<Contact>();
-  contacts.add(Contact(
-      'Furkan ÇELİKCİ', 'Software Developer', Icons.sentiment_neutral));
+  contacts.add(
+      Contact('Furkan ÇELİKCİ', 'Software Developer', Icons.sentiment_neutral));
   contacts.add(Contact(
       'Elif ÇELİKCİ', 'Front-End Developer', Icons.sentiment_satisfied));
   contacts.add(Contact(
