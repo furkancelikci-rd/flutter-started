@@ -6,12 +6,14 @@ class RowsAndColumns extends StatelessWidget {
     final sizeX = MediaQuery.of(context).size.width;
     final sizeY = MediaQuery.of(context).size.height;
     return Container(
-      width: sizeX,
-      height: sizeY,
-      child: Stack(
-        children: showPizzaLayout(sizeX, sizeY),
-      ),
-    );
+        width: sizeX,
+        height: sizeY,
+        child: ListView.separated(
+          itemCount: 25,
+          itemBuilder: (context, index) => createList(index),
+          separatorBuilder: (context, index) => createSeperated(index),
+          scrollDirection: Axis.vertical,
+        ));
   }
 }
 
@@ -36,6 +38,32 @@ List<Widget> createSquare(int numSquare) {
     squares.add(square);
   }
   return squares;
+}
+
+Widget createList(int position) {
+  int i = 0;
+  List colors = [
+    Colors.amber,
+    Colors.deepPurple,
+    Colors.deepOrange,
+    Colors.indigo,
+    Colors.lightBlue
+  ];
+  Container square = Container(
+    color: colors[position % 5],
+    width: 100.0,
+    height: 100.0,
+    child: Text(position.toString()),
+  );
+  return square;
+}
+
+Widget createSeperated(int position) {
+  Widget separator = Container(
+    height: 15,
+    color: Colors.black,
+  );
+  return separator;
 }
 
 List<Widget> showPizzaLayout(double sizeX, double sizeY) {
