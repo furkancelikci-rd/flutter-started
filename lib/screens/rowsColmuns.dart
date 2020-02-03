@@ -8,13 +8,8 @@ class RowsAndColumns extends StatelessWidget {
     return Container(
       width: sizeX,
       height: sizeY,
-      child: Row(
-        //Column
-        //spaceAround: aralarında boşluk bırakılabilir.
-        //spaceBetween: ilk ve son eleman kenara yapışık şekilde aralara boşluk bırakılır
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: createSquare(5),
+      child: Stack(
+        children: showPizzaLayout(sizeX, sizeY),
       ),
     );
   }
@@ -41,4 +36,60 @@ List<Widget> createSquare(int numSquare) {
     squares.add(square);
   }
   return squares;
+}
+
+List<Widget> showPizzaLayout(double sizeX, double sizeY) {
+  List<Widget> layoutChildren = List<Widget>();
+  Container backGround = Container(
+    decoration: BoxDecoration(
+        image: DecorationImage(
+            image: NetworkImage("http://bit.ly/pizza_image"),
+            fit: BoxFit.fitHeight)),
+  );
+  layoutChildren.add(backGround);
+  Positioned pizzaCard = Positioned(
+    top: sizeY / 20,
+    left: sizeX / 40,
+    child: Card(
+      elevation: 12,
+      color: Colors.white70,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Column(
+        children: <Widget>[
+          Text(
+            "Pizza Margherita",
+            style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.deepOrange[800]),
+          ),
+          Padding(
+            padding: EdgeInsets.all(12),
+            child: Text(
+                "This delicious pizza is made of Tomato,\n Mozzorella and Basil. \n\n Seriously you can\'t miss it",
+                style: TextStyle(fontSize: 18, color: Colors.grey[800])),
+          )
+        ],
+      ),
+    ),
+  );
+  layoutChildren.add(pizzaCard);
+  Positioned buttonOrer = Positioned(
+    bottom: sizeY / 20,
+    left: sizeX / 20,
+    width: sizeX - sizeX / 10,
+    child: RaisedButton(
+      elevation: 12,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      color: Colors.orange[900],
+      child: Text(
+        "Order Now!",
+        style: TextStyle(fontSize: 20, color: Colors.white),
+      ),
+      onPressed: () {},
+    ),
+  );
+  layoutChildren.add(buttonOrer);
+
+  return layoutChildren;
 }
