@@ -8,11 +8,8 @@ class RowsAndColumns extends StatelessWidget {
     return Container(
         width: sizeX,
         height: sizeY,
-        child: ListView.separated(
-          itemCount: 25,
-          itemBuilder: (context, index) => createList(index),
-          separatorBuilder: (context, index) => createSeperated(index),
-          scrollDirection: Axis.vertical,
+        child: ListView(
+          children: showContacts(),
         ));
   }
 }
@@ -120,4 +117,45 @@ List<Widget> showPizzaLayout(double sizeX, double sizeY) {
   layoutChildren.add(buttonOrer);
 
   return layoutChildren;
+}
+
+List<Contact> buildContacts() {
+  List<Contact> contacts = List<Contact>();
+  contacts.add(Contact(
+      'Furkan ÇELİKCİ', 'Software Developer', Icons.sentiment_neutral));
+  contacts.add(Contact(
+      'Elif ÇELİKCİ', 'Front-End Developer', Icons.sentiment_satisfied));
+  contacts.add(Contact(
+      'Murat ÖNER', 'FullStack Developer', Icons.sentiment_dissatisfied));
+  contacts.add(Contact(
+      'Yusuf DAŞKIN', 'BackEnd Developer', Icons.sentiment_dissatisfied));
+  return contacts;
+}
+
+List<ListTile> showContacts() {
+  List<Contact> contacts = buildContacts();
+  for (int i = 0; i < 20; i++) {
+    contacts.addAll(buildContacts());
+  }
+  List<ListTile> list = List<ListTile>();
+  contacts.forEach((contact) {
+    list.add(ListTile(
+      title: Text(contact.name),
+      subtitle: Text(contact.subtitle),
+      leading: CircleAvatar(
+        child: Icon(contact.icon),
+        backgroundColor: Colors.amber[600],
+      ),
+      trailing: Icon(Icons.keyboard_arrow_right),
+      onTap: () => true,
+    ));
+  });
+  return list;
+}
+
+class Contact {
+  String name;
+  String subtitle;
+  IconData icon;
+  Contact(this.name, this.subtitle, this.icon);
 }
