@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/Navigation/art_route.dart';
+import 'package:todo_app/screens/Navigation/art_util.dart';
 import 'package:todo_app/screens/basicLayout.dart';
 import 'package:todo_app/screens/gesanim.dart';
 import 'package:todo_app/screens/rowsColmuns.dart';
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.amber,
         accentColor: Color(0xffccff90)
       ),
-      home: MyHomePage(title: 'Flutter Denemeler'),
+      home: MyHomePage(),
     );
   }
 }
@@ -37,10 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
-      ),
-      body: RowsAndColumns(),
+      body: ArtRoute(art: ArtUtil.IMG_VANGOGH,),
     );
   }
 }
