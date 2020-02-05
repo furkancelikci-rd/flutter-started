@@ -4,6 +4,7 @@ import 'package:todo_app/screens/Navigation/art_util.dart';
 class ArtRoute extends StatelessWidget {
   final String art;
   ArtRoute({@required this.art});
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,8 +60,27 @@ class ArtRoute extends StatelessWidget {
             image:
                 DecorationImage(image: NetworkImage(art), fit: BoxFit.cover)),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.lime[900],
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.access_time), title: Text(ArtUtil.CARAVAGGIO)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add_alert), title: Text(ArtUtil.MONET)),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.adjust), title: Text(ArtUtil.VANGOGH))
+        ],
+        onTap: (value) {
+          String _artist = ArtUtil.menuItems[value];
+          _currentIndex = value;
+          changeRoute(context, _artist);
+        },
+      ),
     );
   }
+
+  
 
   void changeRoute(BuildContext context, String menuItem) {
     String image;
@@ -75,7 +95,6 @@ class ArtRoute extends StatelessWidget {
         image = ArtUtil.IMG_VANGOGH;
         break;
     }
-
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => ArtRoute(art: image)));
   }
