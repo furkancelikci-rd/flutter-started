@@ -5,6 +5,9 @@ import 'package:todo_app/screens/animation/util.dart';
 class HeroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final double maxRadius = MediaQuery.of(context).size.width;
+    final double minRadius = 80.0;
+
     return Container(
       padding: EdgeInsets.all(24),
       alignment: Alignment.topLeft,
@@ -12,19 +15,22 @@ class HeroPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           GestureDetector(
-            child: Util.buildHeroIcon(Util.COFFEE_URL, 'coffee'),
+            child: Util.buildHeroRadialIcon(
+                Util.COFFEE_URL, 'coffee', minRadius, maxRadius),
             onTap: () {
               changeRoute(context, 'coffee');
             },
           ),
           GestureDetector(
-            child: Util.buildHeroIcon(Util.CAPPUCCINO_URL, 'cappuccino'),
+            child: Util.buildHeroRadialIcon(
+                Util.CAPPUCCINO_URL, 'cappuccino', minRadius, maxRadius),
             onTap: () {
               changeRoute(context, 'cappuccino');
             },
           ),
           GestureDetector(
-            child: Util.buildHeroIcon(Util.TEA_URL, 'tea'),
+            child: Util.buildHeroRadialIcon(
+                Util.TEA_URL, 'tea', minRadius, maxRadius),
             onTap: () {
               changeRoute(context, 'tea');
             },
